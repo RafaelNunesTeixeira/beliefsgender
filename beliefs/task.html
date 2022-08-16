@@ -1,0 +1,209 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+{{ block style }}
+<style>
+img {
+  max-width: 40%;
+  height: auto;
+}
+td {
+    text-align: center;
+    vertical-align: middle;
+    white-space:nowrap;
+
+    }
+tr {
+    text-align: center;
+    vertical-align: middle;
+    white-space:nowrap;
+
+}
+.slidecontainer {
+  width: 100%;
+    }
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #0736f0;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #0736f0;
+  cursor: pointer;
+}
+
+
+    </style>
+
+{{ endblock }}
+ {{ block title }}{{ endblock }}
+
+{{ block content }}
+
+            <br>
+                  <center><h3>Task {{player.round_number}}</h3></center>
+        <div class="card-body">
+
+            <div class="card bg-light m-3">
+        <div class="card-body">
+
+
+            {{ if case == '1' }}
+<div>
+                      {{ include Constants.task1 }}
+
+</div>
+            {{ endif }}
+
+            {{ if case  == '2' }}
+
+<div>
+                      {{ include Constants.task2 }}
+
+</div>
+            {{ endif }}
+
+            {{ if case  == '3'}}
+
+<div>
+                      {{ include Constants.task3 }}
+
+</div>
+
+            {{ endif }}
+
+
+
+        </div>
+
+        </div>
+             <div class="card bg-light m-3">
+
+                 <center> <h4> <strong> In your opinion: </strong> How hard are tasks similar to this one?</h4></center>
+        <div class="form-group required">
+<table class="table table-hover table-striped table-responsive mx-auto ">
+    <thead>
+
+
+        <tr>
+            <th style="text-align:left">"Very Easy"</th>
+            <th style="text-align:left">“Easy”</th>
+            <th>"Neutral"</th>
+            <th style="text-align:right">“Hard”</th>
+            <th style="text-align:right">“Very Hard”</th>
+        </tr>
+</table>
+
+         <input type="range" name="b1" id="b1" min="10" step="1" max="50" oninput="updateDescription1(this)"   class="slider">
+       <center>      <p > Your guess from 1 (Very Easy) to 5 (Very Hard):  </p></center>
+        <center><p id="score1"> -  </p></center>
+        </div>
+<center> <h4> </strong>In your opinion:</strong> In general, do males or females perform better at similar tasks?</h4></center>
+        <div class="form-group required">
+<table class="table table-hover table-striped table-responsive mx-auto ">
+    <thead>
+
+
+        <tr>
+            <th style="text-align:left">"Males outperform"</th>
+            <th style="text-align:left">"Males slightly better"</th>
+            <th>"No difference"</th>
+            <th style="text-align:right">"Females slightly better"</th>
+            <th style="text-align:right">"Females outperform"</th>
+        </tr>
+</table>
+
+         <input type="range" name="b2" id="b2" min="10" step="1" max="50" oninput="updateDescription2(this)"   class="slider">
+       <center>      <p > Your guess from 1 (Males outperform) to 5 (Females outperform):  </p></center>
+        <center><p id="score2"> -  </p></center>
+        </div>
+
+
+
+        </div>
+
+                     <div class="card bg-light m-3">
+        <div class="card-body">
+            <center>
+                        {{ formfield 'skill' }}
+            </center>
+        </div>
+                     </div>
+              <center>
+
+    {{ next_button }}
+</center>
+        </div>
+
+
+
+<div>
+
+    <br>
+
+
+    <div id="inst2" style="display: none">
+            {{ include Constants.contact }}
+    </div>
+
+{{ endblock }}
+
+{{ block script}}
+<script>
+
+
+function updateDescription1(input) {
+    let score1 = parseInt(input.value)/10;
+    document.getElementById('score1').innerText = `${score1}`;
+}
+function updateDescription2(input) {
+    let score2 = parseInt(input.value)/10;
+    document.getElementById('score2').innerText = `${score2}`;
+}
+function show() {
+  var x = document.getElementById("inst");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+function show2() {
+  var x = document.getElementById("inst2");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+
+{{endblock}}
+
+
+
+
